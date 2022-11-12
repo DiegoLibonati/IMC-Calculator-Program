@@ -32,6 +32,40 @@ I made a python program with tkinter as user interface. In this program we are g
 
 ## Video
 
-
 https://user-images.githubusercontent.com/99032604/199375759-38db9a2f-8994-49ad-9ccd-c6000fb33edf.mp4
 
+## Documentation
+
+The `calculate_imc` function returns the body mass index according to the data entered:
+
+```
+def calculate_imc(self):
+    try:
+        weight = int(self.entry_weight.get())
+        height = int(self.entry_height.get())
+
+        height_in_mts = height / 100
+        operation_imc = weight / (height_in_mts * height_in_mts)
+
+        result_imc_rounded = round(operation_imc, 2)
+
+        self.entry_result.set(result_imc_rounded)
+
+        self.range_result(result_imc_rounded)
+    except:
+        self.label_result.set("YOU NEED TO INPUT CORRECT VALUES")
+```
+
+The `range_result` function obtains in text and according to the body mass index it gave based on the data entered whether the user is skinny, normal, obese etc:
+
+```
+def range_result(self, result):
+    if result < 20:
+        self.label_result.set("You are thin")
+    elif result >= 20 and result <=25:
+        self.label_result.set("You have a normal weight")
+    elif result >= 26 and result <= 30:
+        self.label_result.set("You are overweight")
+    else:
+        self.label_result.set("Obesity status")
+```

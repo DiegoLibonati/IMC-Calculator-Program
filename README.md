@@ -28,7 +28,7 @@ I made a python program with tkinter as user interface. In this program we are g
 
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=IMC%20Calculator%20program`
+`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=IMC%20Calculator%20Program`
 
 ## Video
 

@@ -18,17 +18,9 @@ I made a python program with tkinter as user interface. In this program we are g
 
 1. Tkinter
 
-## Galery
-
-![imc_calculator-program](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Python/Imagenes/imc_calculator-0.jpg)
-
-![imc_calculator-program](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Python/Imagenes/imc_calculator-1.jpg)
-
-![imc_calculator-program](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Python/Imagenes/imc_calculator-2.jpg)
-
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=IMC%20Calculator%20Program`
+[`https://www.diegolibonati.com.ar/#/project/46`](https://www.diegolibonati.com.ar/#/project/46)
 
 ## Video
 

@@ -4,7 +4,7 @@
 
 1. Clone the repository
 2. Join to the correct path of the clone
-3. Use `python imc.py` to execute program
+3. Use `python ./src/app.py` to execute program
 
 ## Description
 
@@ -31,7 +31,9 @@ https://user-images.githubusercontent.com/99032604/199375759-38db9a2f-8994-49ad-
 The `calculate_imc` function returns the body mass index according to the data entered:
 
 ```
-def calculate_imc(self):
+def calculate_imc(
+    self
+) -> None:
     try:
         weight = int(self.entry_weight.get())
         height = int(self.entry_height.get())
@@ -51,13 +53,15 @@ def calculate_imc(self):
 The `range_result` function obtains in text and according to the body mass index it gave based on the data entered whether the user is skinny, normal, obese etc:
 
 ```
-def range_result(self, result):
+def range_result(
+    self, result: int
+) -> None:
     if result < 20:
-        self.label_result.set("You are thin")
+        self.label_result.set("You are thin")  
     elif result >= 20 and result <=25:
         self.label_result.set("You have a normal weight")
     elif result >= 26 and result <= 30:
-        self.label_result.set("You are overweight")
+        self.label_result.set("You are overweight")       
     else:
         self.label_result.set("Obesity status")
 ```

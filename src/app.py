@@ -1,8 +1,9 @@
 from tkinter import *
 
-class IMC():
-
-    def __init__(self,master):
+class IMC:
+    def __init__(
+        self, master: Tk
+    ):
         master.title("IMC Calculator")
         master.geometry("600x300+0+0")
         master.config(bg="#20063B")
@@ -27,7 +28,10 @@ class IMC():
 
         Label(bg="#20063B", font=(self.font_family, 12), textvariable=self.label_result, fg="#fff").place(x=300, y=280, anchor="center")
 
-    def calculate_imc(self):
+
+    def calculate_imc(
+        self
+    ) -> None:
         try:
             weight = int(self.entry_weight.get())
             height = int(self.entry_height.get())
@@ -44,7 +48,9 @@ class IMC():
             self.label_result.set("YOU NEED TO INPUT CORRECT VALUES")
 
 
-    def range_result(self, result):
+    def range_result(
+        self, result: int
+    ) -> None:
         if result < 20:
             self.label_result.set("You are thin")  
         elif result >= 20 and result <=25:
@@ -53,6 +59,7 @@ class IMC():
             self.label_result.set("You are overweight")       
         else:
             self.label_result.set("Obesity status")
+
 
 root = Tk()
 calculator_imc = IMC(root)

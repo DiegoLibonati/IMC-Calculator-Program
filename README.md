@@ -1,4 +1,4 @@
-# Imc-Calculator-Program
+# IMC Calculator Program
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ I made a python program with tkinter as user interface. In this program we are g
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/46`](https://www.diegolibonati.com.ar/#/project/46)
+[`https://www.diegolibonati.com.ar/#/project/IMC-Calculator-Program`](https://www.diegolibonati.com.ar/#/project/IMC-Calculator-Program)
 
 ## Video
 

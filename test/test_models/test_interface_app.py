@@ -1,11 +1,11 @@
 import logging
 
-from src.models.InterfaceApp import InterfaceApp
-from src.utils.constants import PRIMARY
-from src.utils.constants import ERROR_MESSAGE_INVALID_VALUES
+from src.models import InterfaceApp
+from src.utils.constants import ERROR_MESSAGE_INVALID_VALUES, PRIMARY
 
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 CUSTOM_BG = "" or PRIMARY
 
@@ -58,7 +58,7 @@ def test_range_result(interface_app: InterfaceApp) -> None:
     interface_app.range_result(result=25)
 
     assert interface_app.label_result.get() == "You have a normal weight."
-    
+
     interface_app.range_result(result=27)
 
     assert interface_app.label_result.get() == "You are overweight."

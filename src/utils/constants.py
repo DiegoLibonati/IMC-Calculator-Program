@@ -1,6 +1,5 @@
 from tkinter import CENTER
 
-
 FONT_TIMES = "Times"
 
 FONT_TIMES_12 = (FONT_TIMES, 12)
@@ -15,3 +14,8 @@ CENTER = CENTER
 RELIEF_FLAT = "flat"
 
 ERROR_MESSAGE_INVALID_VALUES = "YOU NEED TO INPUT CORRECT VALUES."
+
+MESSAGE_THIN = "You are thin."
+MESSAGE_NORMAL = "You have a normal weight."
+MESSAGE_OVERWEIGHT = "You are overweight."
+MESSAGE_OBESITY = "Obesity status."

@@ -1,8 +1,8 @@
 from tkinter import Button, Entry, Label, StringVar, Tk
 
+from src.core.imc_calculator import calculate_imc
 from src.utils.constants import (
     CENTER,
-    ERROR_MESSAGE_INVALID_VALUES,
     FONT_TIMES_12,
     FONT_TIMES_14,
     FONT_TIMES_20,
@@ -14,14 +14,12 @@ from src.utils.constants import (
 
 class InterfaceApp:
     def __init__(self, root: Tk, bg: str = PRIMARY) -> None:
-        # APP Config
         self.root = root
         self.root.title("IMC Calculator")
         self.root.geometry("600x300")
         self.root.resizable(False, False)
         self.root.config(bg=bg)
 
-        # Create widges
         self.__create_widgets()
 
     def __create_widgets(self) -> None:
@@ -54,7 +52,7 @@ class InterfaceApp:
             text="Calculate",
             relief=RELIEF_FLAT,
             bg=WHITE,
-            command=lambda: self.calculate_imc(),
+            command=self._calculate_and_update,
         ).place(x=300, y=150, anchor=CENTER)
 
         Label(bg=PRIMARY, font=FONT_TIMES_12, text="YOUR IMC: ", fg=WHITE).place(
@@ -68,28 +66,12 @@ class InterfaceApp:
             bg=PRIMARY, font=FONT_TIMES_12, textvariable=self.label_result, fg=WHITE
         ).place(x=300, y=280, anchor=CENTER)
 
-    def calculate_imc(self) -> None:
-        try:
-            weight = int(self.entry_weight.get())
-            height = int(self.entry_height.get())
+    def _calculate_and_update(self) -> None:
+        weight = self.entry_weight.get()
+        height = self.entry_height.get()
 
-            height_in_mts = height / 100
-            operation_imc = weight / (height_in_mts * height_in_mts)
+        result, message = calculate_imc(weight, height)
 
-            result_imc_rounded = round(operation_imc, 2)
-
-            self.entry_result.set(result_imc_rounded)
-
-            self.range_result(result_imc_rounded)
-        except Exception:
-            self.label_result.set(ERROR_MESSAGE_INVALID_VALUES)
-
-    def range_result(self, result: int) -> None:
-        if result < 20:
-            self.label_result.set("You are thin.")
-        elif result >= 20 and result <= 25:
-            self.label_result.set("You have a normal weight.")
-        elif result >= 26 and result <= 30:
-            self.label_result.set("You are overweight.")
-        else:
-            self.label_result.set("Obesity status.")
+        if result is not None:
+            self.entry_result.set(result)
+        self.label_result.set(message)

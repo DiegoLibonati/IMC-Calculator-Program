@@ -2,9 +2,9 @@ import logging
 
 import pytest
 
-from src.core.imc_calculator import calculate_imc, get_imc_status
-from src.utils.constants import (
-    ERROR_MESSAGE_INVALID_VALUES,
+from src.utils.helpers import calculate_imc, get_imc_status
+from src.utils.messages import (
+    MESSAGE_ERROR_INVALID_VALUES,
     MESSAGE_NORMAL,
     MESSAGE_OBESITY,
     MESSAGE_OVERWEIGHT,
@@ -34,7 +34,7 @@ def test_calculate_imc_valid_cases(weight, height, expected_status):
 def test_calculate_imc_invalid_values():
     result, message = calculate_imc("abc", "180")
     assert result is None
-    assert message == ERROR_MESSAGE_INVALID_VALUES
+    assert message == MESSAGE_ERROR_INVALID_VALUES
 
 
 def test_get_imc_status_ranges():

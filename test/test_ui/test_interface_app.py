@@ -1,11 +1,8 @@
 import logging
 
 from src.ui.interface_app import InterfaceApp
-from src.utils.constants import (
-    ERROR_MESSAGE_INVALID_VALUES,
-    MESSAGE_OVERWEIGHT,
-    PRIMARY,
-)
+from src.utils.messages import MESSAGE_ERROR_INVALID_VALUES, MESSAGE_OVERWEIGHT
+from src.utils.styles import PRIMARY
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
@@ -48,4 +45,4 @@ def test_calculate_and_update_invalid_values(interface_app: InterfaceApp) -> Non
 
     interface_app._calculate_and_update()
 
-    assert interface_app.label_result.get() == ERROR_MESSAGE_INVALID_VALUES
+    assert interface_app.label_result.get() == MESSAGE_ERROR_INVALID_VALUES

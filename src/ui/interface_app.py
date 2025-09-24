@@ -1,7 +1,7 @@
 from tkinter import Button, Entry, Label, StringVar, Tk
 
-from src.core.imc_calculator import calculate_imc
-from src.utils.constants import (
+from src.utils.helpers import calculate_imc
+from src.utils.styles import (
     CENTER,
     FONT_TIMES_12,
     FONT_TIMES_14,

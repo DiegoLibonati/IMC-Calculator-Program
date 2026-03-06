@@ -1,4 +1,4 @@
-from src.utils.messages import (
+from src.constants.messages import (
     MESSAGE_ERROR_INVALID_VALUES,
     MESSAGE_NORMAL,
     MESSAGE_OBESITY,

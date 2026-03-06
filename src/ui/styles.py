@@ -1,0 +1,20 @@
+from tkinter import CENTER, FLAT
+
+
+class Styles:
+    PRIMARY_COLOR = "#20063B"
+    WHITE_COLOR = "#FFFFFF"
+    BLACK_COLOR = "#000000"
+
+    FONT_TIMES = "Times"
+    FONT_TIMES_12 = f"{FONT_TIMES} 12"
+    FONT_TIMES_13 = f"{FONT_TIMES} 13"
+    FONT_TIMES_14 = f"{FONT_TIMES} 14"
+    FONT_TIMES_15 = f"{FONT_TIMES} 15"
+    FONT_TIMES_20 = f"{FONT_TIMES} 20"
+
+    CENTER = CENTER
+
+    ANCHOR_CENTER = CENTER
+
+    RELIEF_FLAT = FLAT

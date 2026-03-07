@@ -1,35 +1,47 @@
-import logging
+from src.configs.default_config import DefaultConfig
+from src.configs.development_config import DevelopmentConfig
+from src.configs.production_config import ProductionConfig
 
-from src.configs.logger_config import setup_logger
+
+class TestProductionConfigInheritance:
+    def test_inherits_from_default_config(self) -> None:
+        assert issubclass(ProductionConfig, DefaultConfig)
+
+    def test_inherits_testing_flag(self) -> None:
+        assert ProductionConfig().TESTING is False
+
+    def test_inherits_timezone(self) -> None:
+        assert ProductionConfig().TZ == DefaultConfig().TZ
+
+    def test_inherits_env_name(self) -> None:
+        assert ProductionConfig().ENV_NAME == DefaultConfig().ENV_NAME
 
 
-class TestSetupLogger:
-    def test_returns_logger_instance(self) -> None:
-        logger: logging.Logger = setup_logger("test-logger-instance")
-        assert isinstance(logger, logging.Logger)
+class TestProductionConfigOverrides:
+    def test_debug_is_false(self) -> None:
+        assert ProductionConfig().DEBUG is False
 
-    def test_logger_has_correct_name(self) -> None:
-        logger: logging.Logger = setup_logger("test-logger-name")
-        assert logger.name == "test-logger-name"
+    def test_debug_is_bool(self) -> None:
+        assert isinstance(ProductionConfig().DEBUG, bool)
 
-    def test_logger_default_name(self) -> None:
-        logger: logging.Logger = setup_logger()
-        assert logger.name == "tkinter-app"
+    def test_debug_matches_default(self) -> None:
+        assert ProductionConfig().DEBUG == DefaultConfig().DEBUG
 
-    def test_logger_level_is_debug(self) -> None:
-        logger: logging.Logger = setup_logger("test-logger-level")
-        assert logger.level == logging.DEBUG
 
-    def test_logger_has_handlers(self) -> None:
-        logger: logging.Logger = setup_logger("test-logger-handlers")
-        assert len(logger.handlers) > 0
+class TestProductionConfigEnv:
+    def test_env_is_production(self) -> None:
+        assert ProductionConfig().ENV == "production"
 
-    def test_logger_handler_is_stream_handler(self) -> None:
-        logger: logging.Logger = setup_logger("test-logger-stream")
-        assert any(isinstance(h, logging.StreamHandler) for h in logger.handlers)
+    def test_env_is_string(self) -> None:
+        assert isinstance(ProductionConfig().ENV, str)
 
-    def test_calling_twice_does_not_duplicate_handlers(self) -> None:
-        logger_name: str = "test-logger-no-duplicate"
-        setup_logger(logger_name)
-        logger: logging.Logger = setup_logger(logger_name)
-        assert len(logger.handlers) == 1
+    def test_env_not_in_default_config(self) -> None:
+        assert not hasattr(DefaultConfig, "ENV")
+
+
+class TestProductionVsDevelopmentConfig:
+    def test_debug_differs_from_development(self) -> None:
+        assert ProductionConfig().DEBUG != DevelopmentConfig().DEBUG
+
+    def test_env_differs_from_development(self) -> None:
+        assert ProductionConfig().ENV != DevelopmentConfig().ENV

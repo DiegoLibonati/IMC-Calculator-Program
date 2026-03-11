@@ -1,6 +1,6 @@
 from src.constants.messages import (
-    MESSAGE_ERROR_INVALID_VALUES,
     MESSAGE_NORMAL,
+    MESSAGE_NOT_VALID_FIELDS,
     MESSAGE_OBESITY,
     MESSAGE_OVERWEIGHT,
     MESSAGE_THIN,
@@ -77,11 +77,11 @@ class TestCalculateImc:
 
     def test_returns_error_message_when_weight_is_not_numeric(self) -> None:
         _, message = calculate_imc("abc", "175")
-        assert message == MESSAGE_ERROR_INVALID_VALUES
+        assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_returns_error_message_when_height_is_not_numeric(self) -> None:
         _, message = calculate_imc("70", "abc")
-        assert message == MESSAGE_ERROR_INVALID_VALUES
+        assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_returns_none_result_when_both_inputs_are_empty(self) -> None:
         result, _ = calculate_imc("", "")
@@ -89,7 +89,7 @@ class TestCalculateImc:
 
     def test_returns_error_message_when_both_inputs_are_empty(self) -> None:
         _, message = calculate_imc("", "")
-        assert message == MESSAGE_ERROR_INVALID_VALUES
+        assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_returns_none_result_when_height_is_zero(self) -> None:
         result, _ = calculate_imc("70", "0")
@@ -97,7 +97,7 @@ class TestCalculateImc:
 
     def test_returns_error_message_when_height_is_zero(self) -> None:
         _, message = calculate_imc("70", "0")
-        assert message == MESSAGE_ERROR_INVALID_VALUES
+        assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_result_is_float(self) -> None:
         result, _ = calculate_imc("70", "175")

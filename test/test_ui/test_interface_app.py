@@ -55,14 +55,7 @@ class TestInterfaceAppInit:
 
         assert isinstance(app._styles, Styles)
 
-    def test_main_view_is_created(self, mock_root: MagicMock, mock_styles: MagicMock) -> None:
-        with patch("src.ui.interface_app.MainView") as mock_main_view_class:
-            mock_main_view_class.return_value.grid = MagicMock()
-            InterfaceApp(root=mock_root, config=MagicMock(), styles=mock_styles)
-
-        mock_main_view_class.assert_called_once()
-
-    def test_main_view_on_calculate_is_bound(self, mock_root: MagicMock, mock_styles: MagicMock) -> None:
+    def test_main_view_receives_on_calculate(self, mock_root: MagicMock, mock_styles: MagicMock) -> None:
         with patch("src.ui.interface_app.MainView") as mock_main_view_class:
             mock_main_view_class.return_value.grid = MagicMock()
             InterfaceApp(root=mock_root, config=MagicMock(), styles=mock_styles)
@@ -72,47 +65,81 @@ class TestInterfaceAppInit:
 
 
 class TestInterfaceAppCalculateAndUpdate:
-    def test_set_result_called_when_result_is_not_none(self, interface_app: InterfaceApp) -> None:
-        interface_app._main_view.entry_weight.get.return_value = "70"
-        interface_app._main_view.entry_height.get.return_value = "175"
+    def test_validation_dialog_called_when_result_is_none(self, interface_app: InterfaceApp) -> None:
+        interface_app._main_view.entry_weight.get.return_value = "abc"
+        interface_app._main_view.entry_height.get.return_value = "1.70"
 
-        with patch("src.ui.interface_app.calculate_imc", return_value=(22.86, "You have a normal weight.")):
+        with (
+            patch("src.ui.interface_app.calculate_imc", return_value=(None, "error msg")),
+            patch("src.ui.interface_app.ValidationDialogError") as mock_dialog_class,
+        ):
+            mock_dialog_class.return_value = MagicMock()
             interface_app._calculate_and_update()
 
-        interface_app._main_view.set_result.assert_called_once_with(22.86)
-
-    def test_set_message_always_called(self, interface_app: InterfaceApp) -> None:
-        interface_app._main_view.entry_weight.get.return_value = "70"
-        interface_app._main_view.entry_height.get.return_value = "175"
-
-        with patch("src.ui.interface_app.calculate_imc", return_value=(22.86, "You have a normal weight.")):
-            interface_app._calculate_and_update()
-
-        interface_app._main_view.set_message.assert_called_once_with("You have a normal weight.")
+        mock_dialog_class.assert_called_once_with(message="error msg")
+        mock_dialog_class.return_value.dialog.assert_called_once()
 
     def test_set_result_not_called_when_result_is_none(self, interface_app: InterfaceApp) -> None:
         interface_app._main_view.entry_weight.get.return_value = "abc"
-        interface_app._main_view.entry_height.get.return_value = "175"
+        interface_app._main_view.entry_height.get.return_value = "1.70"
 
-        with patch("src.ui.interface_app.calculate_imc", return_value=(None, "YOU NEED TO INPUT CORRECT VALUES.")):
+        with (
+            patch("src.ui.interface_app.calculate_imc", return_value=(None, "error msg")),
+            patch("src.ui.interface_app.ValidationDialogError") as mock_dialog_class,
+        ):
+            mock_dialog_class.return_value = MagicMock()
             interface_app._calculate_and_update()
 
         interface_app._main_view.set_result.assert_not_called()
 
-    def test_set_message_called_with_error_when_result_is_none(self, interface_app: InterfaceApp) -> None:
+    def test_set_message_not_called_when_result_is_none(self, interface_app: InterfaceApp) -> None:
         interface_app._main_view.entry_weight.get.return_value = "abc"
-        interface_app._main_view.entry_height.get.return_value = "175"
+        interface_app._main_view.entry_height.get.return_value = "1.70"
 
-        with patch("src.ui.interface_app.calculate_imc", return_value=(None, "YOU NEED TO INPUT CORRECT VALUES.")):
+        with (
+            patch("src.ui.interface_app.calculate_imc", return_value=(None, "error msg")),
+            patch("src.ui.interface_app.ValidationDialogError") as mock_dialog_class,
+        ):
+            mock_dialog_class.return_value = MagicMock()
             interface_app._calculate_and_update()
 
-        interface_app._main_view.set_message.assert_called_once_with("YOU NEED TO INPUT CORRECT VALUES.")
+        interface_app._main_view.set_message.assert_not_called()
 
-    def test_calculate_imc_called_with_correct_values(self, interface_app: InterfaceApp) -> None:
+    def test_set_result_called_with_imc_value(self, interface_app: InterfaceApp) -> None:
         interface_app._main_view.entry_weight.get.return_value = "70"
-        interface_app._main_view.entry_height.get.return_value = "175"
+        interface_app._main_view.entry_height.get.return_value = "1.70"
 
-        with patch("src.ui.interface_app.calculate_imc", return_value=(22.86, "You have a normal weight.")) as mock_calculate:
+        with patch("src.ui.interface_app.calculate_imc", return_value=(24.22, "You have a normal weight.")):
             interface_app._calculate_and_update()
 
-        mock_calculate.assert_called_once_with("70", "175")
+        interface_app._main_view.set_result.assert_called_once_with(24.22)
+
+    def test_set_message_called_with_status_message(self, interface_app: InterfaceApp) -> None:
+        interface_app._main_view.entry_weight.get.return_value = "70"
+        interface_app._main_view.entry_height.get.return_value = "1.70"
+
+        with patch("src.ui.interface_app.calculate_imc", return_value=(24.22, "You have a normal weight.")):
+            interface_app._calculate_and_update()
+
+        interface_app._main_view.set_message.assert_called_once_with("You have a normal weight.")
+
+    def test_calculate_imc_called_with_entry_values(self, interface_app: InterfaceApp) -> None:
+        interface_app._main_view.entry_weight.get.return_value = "70"
+        interface_app._main_view.entry_height.get.return_value = "1.70"
+
+        with patch("src.ui.interface_app.calculate_imc", return_value=(24.22, "You have a normal weight.")) as mock_calc:
+            interface_app._calculate_and_update()
+
+        mock_calc.assert_called_once_with("70", "1.70")
+
+    def test_validation_dialog_not_called_when_result_is_valid(self, interface_app: InterfaceApp) -> None:
+        interface_app._main_view.entry_weight.get.return_value = "70"
+        interface_app._main_view.entry_height.get.return_value = "1.70"
+
+        with (
+            patch("src.ui.interface_app.calculate_imc", return_value=(24.22, "You have a normal weight.")),
+            patch("src.ui.interface_app.ValidationDialogError") as mock_dialog_class,
+        ):
+            interface_app._calculate_and_update()
+
+        mock_dialog_class.assert_not_called()

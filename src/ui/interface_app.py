@@ -3,6 +3,7 @@ from tkinter import Tk
 from src.configs.default_config import DefaultConfig
 from src.ui.styles import Styles
 from src.ui.views.main_view import MainView
+from src.utils.dialogs import ValidationDialogError
 from src.utils.helpers import calculate_imc
 
 
@@ -31,6 +32,9 @@ class InterfaceApp:
 
         result, message = calculate_imc(weight, height)
 
-        if result is not None:
-            self._main_view.set_result(result)
+        if result is None:
+            ValidationDialogError(message=message).dialog()
+            return
+
+        self._main_view.set_result(result)
         self._main_view.set_message(message)

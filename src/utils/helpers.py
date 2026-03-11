@@ -1,6 +1,6 @@
 from src.constants.messages import (
-    MESSAGE_ERROR_INVALID_VALUES,
     MESSAGE_NORMAL,
+    MESSAGE_NOT_VALID_FIELDS,
     MESSAGE_OBESITY,
     MESSAGE_OVERWEIGHT,
     MESSAGE_THIN,
@@ -19,7 +19,7 @@ def calculate_imc(weight: str, height: str) -> tuple[float | None, str]:
         return result, get_imc_status(result)
 
     except Exception:
-        return None, MESSAGE_ERROR_INVALID_VALUES
+        return None, MESSAGE_NOT_VALID_FIELDS
 
 
 def get_imc_status(result: float) -> str:

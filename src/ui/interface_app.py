@@ -33,8 +33,7 @@ class InterfaceApp:
         result, message = calculate_imc(weight, height)
 
         if result is None:
-            ValidationDialogError(message=message).dialog()
-            return
+            raise ValidationDialogError(message=message)
 
         self._main_view.set_result(result)
         self._main_view.set_message(message)

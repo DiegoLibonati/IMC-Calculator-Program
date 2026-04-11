@@ -1,4 +1,4 @@
-# IMC Calculator Program
+# BMI Calculator
 
 ## Educational Purpose
 
@@ -64,11 +64,7 @@ pyinstaller==6.16.0
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/IMC-Calculator-Program`](https://www.diegolibonati.com.ar/#/project/IMC-Calculator-Program)
-
-## Video
-
-https://user-images.githubusercontent.com/99032604/199375759-38db9a2f-8994-49ad-9ccd-c6000fb33edf.mp4
+[`https://www.diegolibonati.com.ar/#/project/bmi-calculator`](https://www.diegolibonati.com.ar/#/project/bmi-calculator)
 
 ## Testing
 

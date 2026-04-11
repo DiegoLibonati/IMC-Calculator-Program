@@ -13,8 +13,8 @@ def calculate_imc(weight: str, height: str) -> tuple[float | None, str]:
         height = int(height)
 
         height_in_mts = height / 100
-        imc = weight / (height_in_mts * height_in_mts)
-        result = round(imc, 2)
+        bmi = weight / (height_in_mts * height_in_mts)
+        result = round(bmi, 2)
 
         return result, get_imc_status(result)
 

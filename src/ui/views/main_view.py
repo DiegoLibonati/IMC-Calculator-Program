@@ -24,7 +24,7 @@ class MainView(Frame):
             self,
             bg=self._styles.PRIMARY_COLOR,
             font=self._styles.FONT_TIMES_20,
-            text="IMC CALCULATOR",
+            text="BMI CALCULATOR",
             fg=self._styles.WHITE_COLOR,
         ).grid(row=0, column=0, pady=(25, 15))
 
@@ -55,7 +55,7 @@ class MainView(Frame):
         LabeledEntry(
             parent=self,
             styles=self._styles,
-            label_text="YOUR IMC:",
+            label_text="YOUR BMI:",
             variable=self._entry_result,
         ).grid(row=4, column=0, pady=5, sticky="w", padx=10)
 

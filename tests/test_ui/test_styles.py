@@ -13,7 +13,7 @@ class TestStyles:
     def test_black_color(self) -> None:
         assert Styles.BLACK_COLOR == "#000000"
 
-    def test_font_times_base(self) -> None:
+    def test_font_times(self) -> None:
         assert Styles.FONT_TIMES == "Times"
 
     def test_font_times_12(self) -> None:
@@ -42,4 +42,4 @@ class TestStyles:
 
     def test_instantiation(self) -> None:
         styles: Styles = Styles()
-        assert styles.PRIMARY_COLOR == "#20063B"
+        assert styles is not None

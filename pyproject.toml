@@ -1,12 +1,12 @@
 [project]
-name = "imc-calculator-program"
+name = "bmi-calculator"
 version = "1.0.0"
 description = "I made a python program with tkinter as user interface. In this program we are going to calculate the body mass index, we will have to enter the weight and height of a person. The program will return the BMI of the person in question and how healthy he/she is."
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
 pythonpath = "."
-testpaths = ["test"]
+testpaths = ["tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"

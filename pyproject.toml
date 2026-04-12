@@ -1,7 +1,7 @@
 [project]
-name = "bmi-calculator"
+name = "body-mark"
 version = "1.0.0"
-description = "I made a python program with tkinter as user interface. In this program we are going to calculate the body mass index, we will have to enter the weight and height of a person. The program will return the BMI of the person in question and how healthy he/she is."
+description = "**BodyMark** is a desktop application built with Python and Tkinter that calculates the **Body Mass Index (BMI)** of a person based on their weight and height. The application provides an instant health classification alongside the numeric BMI result, telling the user whether they fall into the underweight, normal weight, overweight, or obese range according to standard WHO guidelines."
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]

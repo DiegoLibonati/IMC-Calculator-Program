@@ -1,4 +1,4 @@
-# BMI Calculator
+# BodyMark
 
 ## Educational Purpose
 
@@ -24,7 +24,13 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 
 ## Description
 
-I made a python program with tkinter as user interface. In this program we are going to calculate the body mass index, we will have to enter the weight and height of a person. The program will return the BMI of the person in question and how healthy he/she is.
+**BodyMark** is a desktop application built with Python and Tkinter that calculates the **Body Mass Index (BMI)** of a person based on their weight and height. The application provides an instant health classification alongside the numeric BMI result, telling the user whether they fall into the underweight, normal weight, overweight, or obese range according to standard WHO guidelines.
+
+The interface is intentionally simple: the user enters their weight (in kilograms) and height (in centimeters or meters), hits the calculate button, and the result is displayed immediately — no accounts, no internet connection, no setup beyond running the script.
+
+Under the hood, the project follows a layered architecture (config, UI, utils, constants) that keeps business logic completely separated from the interface. It also ships with a full test suite (unit + integration), environment-based configuration via `.env`, a global error handling system that surfaces validation errors as friendly dialog boxes, and a PyInstaller build pipeline that packages the app into a single standalone executable for distribution on Windows, Linux, and Mac.
+
+The project serves as a practical reference for structuring real-world Python desktop applications with good engineering practices: clean separation of concerns, pre-commit hooks for linting and formatting, dependency security auditing with `pip-audit`, and CI-ready test configuration with `pytest`.
 
 ## Technologies used
 
@@ -64,7 +70,7 @@ pyinstaller==6.16.0
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/bmi-calculator`](https://www.diegolibonati.com.ar/#/project/bmi-calculator)
+[`https://www.diegolibonati.com.ar/#/project/body-mark`](https://www.diegolibonati.com.ar/#/project/body-mark)
 
 ## Testing
 

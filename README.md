@@ -1,4 +1,4 @@
-# BodyMark
+# Body Mark
 
 ## Educational Purpose
 
@@ -24,7 +24,7 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 
 ## Description
 
-**BodyMark** is a desktop application built with Python and Tkinter that calculates the **Body Mass Index (BMI)** of a person based on their weight and height. The application provides an instant health classification alongside the numeric BMI result, telling the user whether they fall into the underweight, normal weight, overweight, or obese range according to standard WHO guidelines.
+**Body Mark** is a desktop application built with Python and Tkinter that calculates the **Body Mass Index (BMI)** of a person based on their weight and height. The application provides an instant health classification alongside the numeric BMI result, telling the user whether they fall into the underweight, normal weight, overweight, or obese range according to standard WHO guidelines.
 
 The interface is intentionally simple: the user enters their weight (in kilograms) and height (in centimeters or meters), hits the calculate button, and the result is displayed immediately — no accounts, no internet connection, no setup beyond running the script.
 

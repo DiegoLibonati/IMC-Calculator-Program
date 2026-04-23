@@ -12,7 +12,7 @@ class InterfaceApp:
         self._styles = styles
         self._config = config
         self._root = root
-        self._root.title("BodyMark")
+        self._root.title("Body Mark")
         self._root.geometry("600x300")
         self._root.resizable(False, False)
         self._root.config(background=self._styles.PRIMARY_COLOR)

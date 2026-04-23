@@ -1,7 +1,7 @@
 [project]
 name = "body-mark"
 version = "1.0.0"
-description = "BodyMark is a desktop application built with Python and Tkinter that calculates the Body Mass Index (BMI) of a person based on their weight and height. The application provides an instant health classification alongside the numeric BMI result, telling the user whether they fall into the underweight, normal weight, overweight, or obese range according to standard WHO guidelines."
+description = "Body Mark is a desktop application built with Python and Tkinter that calculates the Body Mass Index (BMI) of a person based on their weight and height."
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]

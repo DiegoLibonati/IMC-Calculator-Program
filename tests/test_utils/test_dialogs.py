@@ -95,6 +95,7 @@ class TestBaseDialog:
     def test_open_unknown_type_calls_showerror_with_not_found(self) -> None:
         dialog: BaseDialog = BaseDialog()
         dialog.dialog_type = "UNKNOWN"
+        mock_fn: MagicMock
         with patch("src.utils.dialogs.messagebox.showerror") as mock_fn:
             dialog.open()
             mock_fn.assert_called_once_with(BaseDialog.ERROR, MESSAGE_NOT_FOUND_DIALOG_TYPE)

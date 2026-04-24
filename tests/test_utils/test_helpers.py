@@ -14,61 +14,83 @@ class TestCalculateImc:
         assert isinstance(result, tuple)
 
     def test_valid_normal_weight(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("70", "170")
         assert result == 24.22
         assert message == MESSAGE_NORMAL
 
     def test_valid_thin(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("50", "170")
         assert result is not None
         assert message == MESSAGE_THIN
 
     def test_valid_overweight(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("80", "170")
         assert result is not None
         assert message == MESSAGE_OVERWEIGHT
 
     def test_valid_obesity(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("90", "170")
         assert result is not None
         assert message == MESSAGE_OBESITY
 
     def test_invalid_weight_string(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("abc", "170")
         assert result is None
         assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_invalid_height_string(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("70", "xyz")
         assert result is None
         assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_empty_weight(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("", "170")
         assert result is None
         assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_empty_height(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("70", "")
         assert result is None
         assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_zero_height(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("70", "0")
         assert result is None
         assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_float_string_weight(self) -> None:
+        result: float | None
+        message: str
         result, message = calculate_imc("70.5", "170")
         assert result is None
         assert message == MESSAGE_NOT_VALID_FIELDS
 
     def test_result_is_rounded_to_two_decimals(self) -> None:
+        result: float | None
         result, _ = calculate_imc("70", "170")
         assert result is not None
         assert result == round(result, 2)
 
     def test_negative_height_computes_valid_imc(self) -> None:
+        result: float | None
         result, _ = calculate_imc("70", "-170")
         assert result is not None
         assert result > 0

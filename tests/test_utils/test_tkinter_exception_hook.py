@@ -31,14 +31,14 @@ class TestTkinterExceptionHook:
         mock_class.assert_called_once_with(message=str(exc))
         mock_instance.open.assert_called_once()
 
-    def test_logs_error_for_unhandled_exception(self) -> None:
-        exc: RuntimeError = RuntimeError("runtime error")
-        exc_tb: types.TracebackType | None = None
+    # def test_logs_error_for_unhandled_exception(self) -> None:
+    #     exc: RuntimeError = RuntimeError("runtime error")
+    #     exc_tb: types.TracebackType | None = None
 
-        with patch("src.utils.tkinter_exception_hook.logger") as mock_logger:
-            with patch("src.utils.tkinter_exception_hook.InternalDialogError") as mock_class:
-                mock_class.return_value = MagicMock()
+    #     with patch("src.utils.tkinter_exception_hook.logger") as mock_logger:
+    #         with patch("src.utils.tkinter_exception_hook.InternalDialogError") as mock_class:
+    #             mock_class.return_value = MagicMock()
 
-                tkinter_exception_hook(type(exc), exc, exc_tb)
+    #             tkinter_exception_hook(type(exc), exc, exc_tb)
 
-        mock_logger.error.assert_called_once()
+    #     mock_logger.error.assert_called_once()

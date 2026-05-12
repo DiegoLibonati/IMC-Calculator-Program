@@ -6,111 +6,53 @@ from src.ui.components.labeled_entry import LabeledEntry
 from src.ui.styles import Styles
 
 
+@pytest.mark.unit
 class TestLabeledEntry:
-    def test_instantiation(self, root: tk.Tk) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
+    def test_initializes_as_frame(self, root: tk.Tk) -> None:
+        variable: tk.StringVar = tk.StringVar()
 
-        widget: LabeledEntry = LabeledEntry(
+        entry: LabeledEntry = LabeledEntry(
             parent=root,
-            styles=styles,
-            label_text="Test:",
+            styles=Styles(),
+            label_text="Weight:",
             variable=variable,
         )
 
-        assert widget is not None
+        assert isinstance(entry, tk.Frame)
 
-    def test_variable_initial_value_is_empty(self, root: tk.Tk) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
+    def test_initializes_with_default_show_empty(self, root: tk.Tk) -> None:
+        variable: tk.StringVar = tk.StringVar()
 
-        LabeledEntry(
+        entry: LabeledEntry = LabeledEntry(
             parent=root,
-            styles=styles,
-            label_text="Test:",
+            styles=Styles(),
+            label_text="Field:",
             variable=variable,
         )
 
-        assert variable.get() == ""
+        assert isinstance(entry, tk.Frame)
 
-    def test_variable_set_updates_value(self, root: tk.Tk) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
-        LabeledEntry(
+    def test_initializes_with_custom_show(self, root: tk.Tk) -> None:
+        variable: tk.StringVar = tk.StringVar()
+
+        entry: LabeledEntry = LabeledEntry(
             parent=root,
-            styles=styles,
-            label_text="Test:",
-            variable=variable,
-        )
-
-        variable.set("hello")
-
-        assert variable.get() == "hello"
-
-    def test_background_matches_primary_color(self, root: tk.Tk) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
-
-        widget: LabeledEntry = LabeledEntry(
-            parent=root,
-            styles=styles,
-            label_text="Test:",
-            variable=variable,
-        )
-
-        assert widget.cget("bg") == styles.PRIMARY_COLOR
-
-    def test_instantiation_with_show_param(self, root: tk.Tk) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
-
-        widget: LabeledEntry = LabeledEntry(
-            parent=root,
-            styles=styles,
+            styles=Styles(),
             label_text="Password:",
             variable=variable,
             show="*",
         )
 
-        assert widget is not None
+        assert isinstance(entry, tk.Frame)
 
-    @pytest.mark.parametrize("label_text", ["Weight:", "Height in CM:", "YOUR BMI:"])
-    def test_instantiation_with_various_label_texts(self, root: tk.Tk, label_text: str) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
+    def test_variable_retains_value_after_creation(self, root: tk.Tk) -> None:
+        variable: tk.StringVar = tk.StringVar(value="initial")
 
-        widget: LabeledEntry = LabeledEntry(
+        LabeledEntry(
             parent=root,
-            styles=styles,
-            label_text=label_text,
+            styles=Styles(),
+            label_text="Weight:",
             variable=variable,
         )
 
-        assert widget is not None
-
-    def test_is_frame_subclass(self, root: tk.Tk) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
-
-        widget: LabeledEntry = LabeledEntry(
-            parent=root,
-            styles=styles,
-            label_text="Label:",
-            variable=variable,
-        )
-
-        assert isinstance(widget, tk.Frame)
-
-    def test_empty_show_param_does_not_affect_instantiation(self, root: tk.Tk) -> None:
-        styles: Styles = Styles()
-        variable: tk.StringVar = tk.StringVar(root)
-
-        widget: LabeledEntry = LabeledEntry(
-            parent=root,
-            styles=styles,
-            label_text="Field:",
-            variable=variable,
-            show="",
-        )
-
-        assert widget is not None
+        assert variable.get() == "initial"

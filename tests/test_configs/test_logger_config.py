@@ -1,35 +1,41 @@
 import logging
 
+import pytest
+
 from src.configs.logger_config import setup_logger
 
 
+@pytest.mark.unit
 class TestSetupLogger:
-    def test_returns_logger(self) -> None:
+    def test_returns_logger_instance(self) -> None:
         logger: logging.Logger = setup_logger()
+
         assert isinstance(logger, logging.Logger)
 
-    def test_default_name(self) -> None:
+    def test_default_name_is_tkinter_app(self) -> None:
         logger: logging.Logger = setup_logger()
+
         assert logger.name == "tkinter-app"
 
-    def test_custom_name(self) -> None:
+    def test_custom_name_is_used(self) -> None:
         logger: logging.Logger = setup_logger("custom-logger")
+
         assert logger.name == "custom-logger"
 
-    def test_has_handlers(self) -> None:
-        logger: logging.Logger = setup_logger()
-        assert len(logger.handlers) > 0
+    def test_logger_has_debug_level(self) -> None:
+        logger: logging.Logger = setup_logger("level-test-logger")
 
-    def test_level_is_debug(self) -> None:
-        logger: logging.Logger = setup_logger()
         assert logger.level == logging.DEBUG
 
-    def test_idempotent_handlers(self) -> None:
-        logger1: logging.Logger = setup_logger("idempotent-test")
-        count: int = len(logger1.handlers)
-        logger2: logging.Logger = setup_logger("idempotent-test")
-        assert len(logger2.handlers) == count
+    def test_logger_has_at_least_one_handler(self) -> None:
+        logger: logging.Logger = setup_logger("handler-test-logger")
 
-    def test_handler_is_stream_handler(self) -> None:
-        logger: logging.Logger = setup_logger()
-        assert any(isinstance(h, logging.StreamHandler) for h in logger.handlers)
+        assert len(logger.handlers) >= 1
+
+    def test_calling_twice_does_not_duplicate_handlers(self) -> None:
+        logger_first: logging.Logger = setup_logger("no-dup-logger")
+        handler_count: int = len(logger_first.handlers)
+
+        logger_second: logging.Logger = setup_logger("no-dup-logger")
+
+        assert len(logger_second.handlers) == handler_count

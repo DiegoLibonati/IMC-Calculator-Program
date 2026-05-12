@@ -1,6 +1,10 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-block_cipher = None
+# WARNING: The `.env` bundled below MUST be a separate production artifact
+# (for example `build/.env.prod` or `.env.prod` copied to `.env` only at
+# build time). Never bundle the development `.env` from the repository into
+# the distributed binary, and never commit a `.env` that contains real
+# production secrets. See the "Production" section of README.md for details.
 
 a = Analysis(
     ['app.py'],
@@ -16,7 +20,7 @@ a = Analysis(
     optimize=0,
 )
 
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+pyz = PYZ(a.pure, a.zipped_data)
 
 exe = EXE(
     pyz,

@@ -60,11 +60,10 @@ With the dependencies above in mind, follow these steps to run the app locally:
 2. Go to the repository folder and execute: `python -m venv venv`
 3. Execute in Windows: `venv\Scripts\activate`
 4. Execute in Linux/Mac: `source venv/bin/activate`
-5. Execute: `pip install -r requirements.txt`
-6. Execute: `pip install -r requirements.dev.txt`
-7. Execute: `pip install -r requirements.test.txt`
-8. Copy the development environment template: `cp .env.example.dev .env` (Windows: `copy .env.example.dev .env`)
-9. Use `python app.py` or `python -m src` to execute the program
+5. Install the runtime, dev, and test dependencies in one shot: `pip install -e ".[dev,test]"`
+   - Alternatively, you can still use the pinned lockfiles individually: `pip install -r requirements.txt && pip install -r requirements.dev.txt && pip install -r requirements.test.txt`
+6. Copy the development environment template: `cp .env.example.dev .env` (Windows: `copy .env.example.dev .env`)
+7. Use `python app.py` or `python -m src` to execute the program
 
 ### Pre-Commit for Development
 
@@ -103,6 +102,10 @@ Before shipping, scan dependencies for known vulnerabilities using **pip-audit**
 ## Build
 
 Once tests pass and dependencies are clean, generate a standalone executable (`.exe` on Windows, or binary on Linux/Mac) using **PyInstaller**.
+
+### Production secrets warning
+
+> **IMPORTANT:** The `app.spec` file bundles the repository-level `.env` into the distributed binary. Real production secrets **must never** live in the `.env` that sits at the repo root (the same file you use during development). Before building a production artifact, replace the dev `.env` with a dedicated production file (for example `.env.prod` copied/symlinked into `.env` only at build time), and remove it after the build. Never commit a `.env` containing real production values to the repository.
 
 ### Windows
 

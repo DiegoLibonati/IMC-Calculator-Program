@@ -8,8 +8,13 @@ from src.utils.helpers import calculate_imc
 
 
 class InterfaceApp:
-    def __init__(self, root: Tk, config: DefaultConfig, styles: Styles = Styles()) -> None:
-        self._styles = styles
+    def __init__(
+        self,
+        root: Tk,
+        config: DefaultConfig,
+        styles: Styles | None = None,
+    ) -> None:
+        self._styles = styles if styles is not None else Styles()
         self._config = config
         self._root = root
         self._root.title("Body Mark")

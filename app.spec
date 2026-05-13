@@ -1,10 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-# WARNING: The `.env` bundled below MUST be a separate production artifact
-# (for example `build/.env.prod` or `.env.prod` copied to `.env` only at
-# build time). Never bundle the development `.env` from the repository into
-# the distributed binary, and never commit a `.env` that contains real
-# production secrets. See the "Production" section of README.md for details.
+# WARNING: The `.env` bundled below is included as-is. Set production values
+# in `.env` before building. Never commit a `.env` containing real secrets.
 
 a = Analysis(
     ['app.py'],

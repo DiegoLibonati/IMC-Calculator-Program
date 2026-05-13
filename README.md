@@ -74,7 +74,7 @@ With the dependencies above in mind, follow these steps to run the app locally:
 
 ## Env Keys
 
-The `.env` file you copied in the previous step controls how the app boots. Templates live in `.env.example.dev` and `.env.example.prod`.
+The `.env` file you copied in the previous step controls how the app boots. The template lives in `.env.example.dev`.
 
 1. `ENVIRONMENT`: Defines the application environment. Accepts `development`, `production`, or `testing`.
 
@@ -106,7 +106,7 @@ Once tests pass and dependencies are clean, generate a standalone executable (`.
 
 ### Production secrets warning
 
-> **IMPORTANT:** The `app.spec` file bundles the repository-level `.env` into the distributed binary. Real production secrets **must never** live in the `.env` that sits at the repo root (the same file you use during development). Before building a production artifact, replace the dev `.env` with a dedicated production file (for example `.env.prod` copied/symlinked into `.env` only at build time), and remove it after the build. Never commit a `.env` containing real production values to the repository.
+> **IMPORTANT:** The `app.spec` file bundles `.env` into the distributed binary. Before building a production artifact, set your production values directly in `.env`. Never commit a `.env` containing real production secrets to the repository.
 
 ### Windows
 

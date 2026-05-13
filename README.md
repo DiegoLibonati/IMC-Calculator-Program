@@ -28,7 +28,7 @@ All dependencies are declared in `pyproject.toml`. The `requirements*.txt` files
 #### Runtime (`[project.dependencies]`)
 
 ```
-python-dotenv>=1.0
+python-dotenv==1.0.1
 ```
 
 #### Dev (`[project.optional-dependencies]` dev)

@@ -40,5 +40,5 @@ class InterfaceApp:
         if result is None:
             raise ValidationDialogError(message=message)
 
-        self._main_view.set_result(result)
+        self._main_view.set_result(str(result))
         self._main_view.set_message(message)

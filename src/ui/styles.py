@@ -1,4 +1,5 @@
 from tkinter import CENTER, FLAT
+from typing import Literal
 
 
 class Styles:
@@ -17,4 +18,4 @@ class Styles:
 
     ANCHOR_CENTER = CENTER
 
-    RELIEF_FLAT = FLAT
+    RELIEF_FLAT: Literal["flat"] = FLAT

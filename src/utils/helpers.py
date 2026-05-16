@@ -9,11 +9,11 @@ from src.constants.messages import (
 
 def calculate_imc(weight: str, height: str) -> tuple[float | None, str]:
     try:
-        weight = int(weight)
-        height = int(height)
+        weight_value = int(weight)
+        height_value = int(height)
 
-        height_in_mts = height / 100
-        bmi = weight / (height_in_mts * height_in_mts)
+        height_in_mts = height_value / 100
+        bmi = weight_value / (height_in_mts * height_in_mts)
         result = round(bmi, 2)
 
         return result, get_imc_status(result)
